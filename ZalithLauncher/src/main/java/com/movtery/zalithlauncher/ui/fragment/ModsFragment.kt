@@ -298,11 +298,7 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
     }
     
     private fun checkForModUpdates() {
-        val version = try {
-            VersionsManager.currentGameInfo.selectedVersion
-        } catch (e: UninitializedPropertyAccessException) {
-            null
-        }
+        val version = VersionsManager.getCurrentVersion()
         if (version == null) {
             Toast.makeText(requireContext(), R.string.error_no_version, Toast.LENGTH_SHORT).show()
             return
@@ -329,7 +325,7 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
             modInfoList
         }.ended(TaskExecutors.getAndroidUI()) { modInfoList ->
             dialog.dismiss()
-            if (modInfoList.isEmpty()) {
+            if (modInfoList.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), R.string.mod_update_no_mods, Toast.LENGTH_SHORT).show()
             } else {
                 ModUpdateDialog(

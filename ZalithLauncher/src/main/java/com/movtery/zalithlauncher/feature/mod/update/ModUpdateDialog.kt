@@ -12,7 +12,7 @@ import com.movtery.zalithlauncher.feature.mod.parser.ModInfo
 import com.movtery.zalithlauncher.feature.version.Version
 import com.movtery.zalithlauncher.task.Task
 import com.movtery.zalithlauncher.task.TaskExecutors
-import com.movtery.zalithlauncher.ui.dialog.DraggableDialog
+import androidx.appcompat.app.AlertDialog as AndroidAlertDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,10 +38,10 @@ class ModUpdateDialog(
     fun show() {
         binding = DialogModUpdateBinding.inflate(android.view.LayoutInflater.from(context))
         
-        dialog = DraggableDialog.DialogBuilder(context)
+        dialog = AndroidAlertDialog.Builder(context, com.movtery.zalithlauncher.R.style.CustomAlertDialogTheme)
             .setView(binding.root)
             .setCancelable(true)
-            .build()
+            .create()
         
         dialog?.show()
         

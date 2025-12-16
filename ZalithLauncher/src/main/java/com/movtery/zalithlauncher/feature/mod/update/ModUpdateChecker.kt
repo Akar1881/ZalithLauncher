@@ -111,7 +111,7 @@ class ModUpdateChecker(
                         updates.add(updateInfo)
                     }
                 } catch (e: Exception) {
-                    Logging.e(TAG, "Error processing Modrinth update for ${modInfo.name}", e)
+                    Logging.e(TAG, "Error processing Modrinth update for ${modInfo.getName()}", e)
                 }
             }
         } catch (e: Exception) {
@@ -163,7 +163,7 @@ class ModUpdateChecker(
         val updates = mutableListOf<ModUpdateInfo>()
         
         try {
-            val fileFingerprints = mutableMapOf<Long, Pair<ModInfo, File, String>>()
+            val fileFingerprints = mutableMapOf<Long, Triple<ModInfo, File, String>>()
             
             for (modInfo in modInfoList) {
                 val file = modInfo.file ?: continue
@@ -302,5 +302,4 @@ class ModUpdateChecker(
         }
     }
     
-    private data class Triple<A, B, C>(val first: A, val second: B, val third: C)
 }
