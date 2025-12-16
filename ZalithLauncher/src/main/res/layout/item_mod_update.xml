@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_item"
+    android:padding="@dimen/_8sdp"
+    android:layout_marginBottom="@dimen/_4sdp">
+
+    <com.movtery.zalithlauncher.ui.view.AnimCheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/mod_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/primary_text"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/platform_badge"
+        app:layout_constraintStart_toEndOf="@id/checkbox"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sodium" />
+
+    <TextView
+        android:id="@+id/platform_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_item"
+        android:paddingHorizontal="@dimen/_4sdp"
+        android:paddingVertical="@dimen/_2sdp"
+        android:textColor="@color/secondary_text"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Modrinth" />
+
+    <TextView
+        android:id="@+id/current_version"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/secondary_text"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/checkbox"
+        app:layout_constraintTop_toBottomOf="@id/mod_name"
+        tools:text="Current: 0.5.8" />
+
+    <TextView
+        android:id="@+id/new_version"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/green_accept"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/checkbox"
+        app:layout_constraintTop_toBottomOf="@id/current_version"
+        tools:text="New: 0.5.11" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

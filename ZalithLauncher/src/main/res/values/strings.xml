@@ -138,6 +138,24 @@
     <string name="mod_check_imblocker">IMBlocker/In-GameIME (%s) is not compatible with Android and will cause the game to crash during startup.</string>
     <string name="mod_check_replay_mod">ReplayMod (%s) requires FFmpeg to render videos. Please install the FFmpeg plugin separately\n%s\n%s</string>
     <string name="mod_check_borderlesswindow">Borderless Window (%s) is not compatible with Android and will cause the game to crash during startup.</string>
+    <!-- Mod Updates -->
+    <string name="mod_update_title">Mod Updates</string>
+    <string name="mod_update_check_updates">Check for Updates</string>
+    <string name="mod_update_checking">Checking for updates…</string>
+    <string name="mod_update_checking_progress">Checking mods (%d / %d)</string>
+    <string name="mod_update_found">%d update(s) available</string>
+    <string name="mod_update_no_updates">All mods are up to date!</string>
+    <string name="mod_update_update_all">Update All</string>
+    <string name="mod_update_update_selected">Update Selected</string>
+    <string name="mod_update_downloading">Downloading updates…</string>
+    <string name="mod_update_downloading_progress">Downloading %s (%d / %d)</string>
+    <string name="mod_update_success">Successfully updated %d mod(s)</string>
+    <string name="mod_update_failed">Failed to update some mods</string>
+    <string name="mod_update_from_platform">From %s</string>
+    <string name="mod_update_current_version">Current: %s</string>
+    <string name="mod_update_new_version">New: %s</string>
+    <string name="mod_update_no_mods">No mods installed</string>
+    <string name="mod_update_error">Error checking for updates</string>
     <!-- Controls -->
     <string name="control_primary">Left Click</string>
     <string name="control_secondary">Right Click</string>

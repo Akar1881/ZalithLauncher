@@ -18,6 +18,17 @@
         android:src="@drawable/ic_refresh" />
 
     <ImageButton
+        android:id="@+id/check_update_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/mod_update_check_updates"
+        android:scaleType="fitCenter"
+        android:visibility="gone"
+        android:src="@drawable/ic_download" />
+
+    <ImageButton
         android:id="@+id/search_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

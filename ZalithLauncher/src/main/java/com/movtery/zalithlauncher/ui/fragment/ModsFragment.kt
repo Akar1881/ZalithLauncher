@@ -16,6 +16,9 @@ import com.movtery.zalithlauncher.R
 import com.movtery.zalithlauncher.databinding.FragmentModsBinding
 import com.movtery.zalithlauncher.feature.mod.ModToggleHandler
 import com.movtery.zalithlauncher.feature.mod.ModUtils
+import com.movtery.zalithlauncher.feature.mod.parser.ModParser
+import com.movtery.zalithlauncher.feature.mod.update.ModUpdateDialog
+import com.movtery.zalithlauncher.feature.version.VersionsManager
 import com.movtery.zalithlauncher.task.Task
 import com.movtery.zalithlauncher.task.TaskExecutors
 import com.movtery.zalithlauncher.ui.dialog.FilesDialog
@@ -233,6 +236,12 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
                     closeMultiSelect()
                     fileRecyclerView.refreshPath()
                 }
+                
+                checkUpdateButton.visibility = View.VISIBLE
+                checkUpdateButton.setOnClickListener {
+                    closeMultiSelect()
+                    checkForModUpdates()
+                }
             }
 
             goDownloadText.setOnClickListener{ goDownloadMod() }
@@ -287,6 +296,59 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
             null
         )
     }
+    
+    private fun checkForModUpdates() {
+        val version = try {
+            VersionsManager.currentGameInfo.selectedVersion
+        } catch (e: UninitializedPropertyAccessException) {
+            null
+        }
+        if (version == null) {
+            Toast.makeText(requireContext(), R.string.error_no_version, Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        val modsDir = File(mRootPath)
+        val modFiles = modsDir.listFiles { file -> 
+            file.isFile && (file.name.endsWith(ModUtils.JAR_FILE_SUFFIX) || 
+                           file.name.endsWith(ModUtils.DISABLE_JAR_FILE_SUFFIX))
+        }
+        
+        if (modFiles.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), R.string.mod_update_no_mods, Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        val dialog = ZHTools.showTaskRunningDialog(requireContext())
+        Task.runTask {
+            val modInfoList = modFiles.mapNotNull { file ->
+                runCatching {
+                    val modInfo = ModParser.parseJarMod(file, false)
+                    modInfo?.setFile(file)
+                    modInfo
+                }.getOrNull()
+            }
+            modInfoList
+        }.ended(TaskExecutors.getAndroidUI()) { modInfoList ->
+            dialog.dismiss()
+            if (modInfoList.isEmpty()) {
+                Toast.makeText(requireContext(), R.string.mod_update_no_mods, Toast.LENGTH_SHORT).show()
+            } else {
+                ModUpdateDialog(
+                    context = requireContext(),
+                    version = version,
+                    modInfoList = modInfoList,
+                    modsDir = modsDir
+                ) {
+                    binding.fileRecyclerView.refreshPath()
+                }.show()
+            }
+        }.onThrowable { e ->
+            dialog.dismiss()
+            Toast.makeText(requireContext(), R.string.mod_update_error, Toast.LENGTH_SHORT).show()
+            Tools.showErrorRemote(e)
+        }.execute()
+    }
 
     private fun parseBundle() {
         val bundle = arguments ?: throw NullPointerException("The argument is null!")
@@ -327,7 +389,8 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
                     pasteButton,
                     createFolderButton,
                     searchButton,
-                    refreshButton
+                    refreshButton,
+                    checkUpdateButton
                 )
             }
         }
