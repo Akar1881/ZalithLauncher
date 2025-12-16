@@ -24,5 +24,5 @@ data class ModUpdateInfo(
     
     fun hasUpdate(): Boolean = currentHash != latestFileHash
     
-    fun getDisplayName(): String = modInfo.name ?: modInfo.id ?: currentFile.nameWithoutExtension
+    fun getDisplayName(): String = modInfo.getName() ?: modInfo.getId() ?: currentFile.nameWithoutExtension
 }

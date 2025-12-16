@@ -323,9 +323,7 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
         Task.runTask {
             val modInfoList = modFiles.mapNotNull { file ->
                 runCatching {
-                    val modInfo = ModParser.parseJarMod(file, false)
-                    modInfo?.setFile(file)
-                    modInfo
+                    ModParser.parseJarMod(file, true)
                 }.getOrNull()
             }
             modInfoList

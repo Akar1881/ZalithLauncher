@@ -35,7 +35,7 @@ class ModUpdateAdapter(
             }
             currentVersion.text = context.getString(
                 R.string.mod_update_current_version,
-                update.modInfo.version ?: "Unknown"
+                update.modInfo.getVersion() ?: "Unknown"
             )
             newVersion.text = context.getString(
                 R.string.mod_update_new_version,

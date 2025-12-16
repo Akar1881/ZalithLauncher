@@ -268,7 +268,7 @@ class ModUpdateChecker(
             
             val hasMatchingLoader = modLoaders.isEmpty() || gameVersions.any { gv ->
                 modLoaders.any { loader -> 
-                    gv.asString.equals(loader.displayName, ignoreCase = true) ||
+                    gv.asString.equals(loader.loaderName, ignoreCase = true) ||
                     gv.asString.equals(loader.modrinthName, ignoreCase = true)
                 }
             }

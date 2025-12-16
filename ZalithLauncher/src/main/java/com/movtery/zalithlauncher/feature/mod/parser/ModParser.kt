@@ -38,6 +38,19 @@ class ModParser {
             }
             parserListener.onParseEnded(emptyList())
         }
+        
+        /**
+         * Parse a single mod jar file and return its ModInfo
+         * @param modFile The jar file to parse
+         * @param setFile Whether to set the file reference on the ModInfo
+         * @return ModInfo if parsing succeeds, null otherwise
+         */
+        @JvmStatic
+        fun parseJarMod(modFile: File, setFile: Boolean = true): ModInfo? {
+            return ModParser().parseModContents(modFile)?.apply {
+                if (setFile) file = modFile
+            }
+        }
     }
 
     /**
